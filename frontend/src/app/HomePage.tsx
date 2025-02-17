@@ -1,29 +1,52 @@
-import React from "react";
+import React, { useContext } from "react";
 import img from "../assets/medical-stethoscope-white.jpg";
 import "./homepage.css";
+import AuthContext from "../providers/authProvider";
+// import { useNavigate } from "react-router";
+import { ToastContainer } from "react-toastify";
 
 export default function HomePage() {
+  const {
+    // setUser,
+    // setAuthTokens,
+    // registerUser,
+    // loginUser,
+    logoutUser,
+    // user,
+    authTokens,
+  } = useContext(AuthContext);
+
   return (
     <div
-      className="h-screen bg-[#DBDEE3] body"
-      style={{
-        backgroundImage: `url(${img})`,
-      }}
+    className="h-screen bg-[#DBDEE3] body"
+    style={{
+      backgroundImage: `url(${img})`,
+    }}
     >
+    <ToastContainer />
       {/* Header */}
       <div
         className="header flex justify-end gap-16 py-4 bg-transparent"
-        style={{ right: "15%", position: "relative" }}
+        style={{ right: "15%", position: "relative", alignItems: "center"}}
       >
         <a href="/" className="text-xl font-bold">
           Home
         </a>
-        <a href="/SignIn" className="text-xl font-bold ">
-          Login
-        </a>
+
+        {authTokens ? (
+          <button onClick={logoutUser} className="text-xl font-bold cursor-pointer">
+            Logout
+          </button>
+        ) : (
+          <a href="/SignIn" className="text-xl font-bold">
+            Sign In
+          </a>
+        )}
+
         <a href="/" className="text-xl font-bold">
           AI help
         </a>
+
       </div>
 
       {/* Main Content */}

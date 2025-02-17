@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import MuiCard from "@mui/material/Card";
@@ -14,6 +14,8 @@ import { styled } from "@mui/material/styles";
 import ForgotPassword from "./ForgotPassword";
 import { GoogleIcon, FacebookIcon } from "./CustomIcons";
 import logo from "../../../assets/logo2.png";
+import AuthContext from "../../../providers/authProvider";
+import { ToastContainer } from "react-toastify";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -41,6 +43,16 @@ export default function SignInCard() {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
   const [open, setOpen] = React.useState(false);
 
+  const {
+    // setUser,
+    // setAuthTokens,
+    // registerUser,
+    loginUser,
+    // logoutUser,
+    // user,
+    // authTokens,
+  } = useContext(AuthContext);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -49,16 +61,17 @@ export default function SignInCard() {
     setOpen(false);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (emailError || passwordError) {
-      event.preventDefault();
       return;
     }
+
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const email = data.get("email");
+    const password = data.get("password");
+    await loginUser({email, password});
   };
 
   const validateInputs = () => {
@@ -90,6 +103,7 @@ export default function SignInCard() {
 
   return (
     <Card variant="outlined">
+      <ToastContainer />
       <Box sx={{ display: { xs: "flex", md: "none" } }}>
         <img
           src={logo}

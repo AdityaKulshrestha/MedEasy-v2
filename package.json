@@ -1,0 +1,21 @@
+{
+  "name": "medeasy-v2",
+  "version": "1.0.0",
+  "description": "MedEasy is an intelligent healthcare assistant that leverages AI to support medical professionals in patient diagnosis and examination processes. The system aims to enhance the efficiency and accuracy of medical consultations through advanced AI technologies.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd backend && python manage.py runserver\" \"cd frontend && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyushSinghbharti/MedEasy-v2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AyushSinghbharti/MedEasy-v2/issues"
+  },
+  "homepage": "https://github.com/AyushSinghbharti/MedEasy-v2#readme"
+}
